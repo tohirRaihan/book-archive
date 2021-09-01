@@ -7,23 +7,26 @@ const loadBooks = (url) => {
 
 // display books ---------------------------------------------------------------
 const displayBooks = (books) => {
-    // get search resuld field and clear previous results
+    // get search result field and clear previous results
     const searchItemsField = document.getElementById('search-items');
     searchItemsField.textContent = '';
 
     // creating single item to display in search result
     books.forEach((book) => {
-        // console.log(...book.author_name);
+        console.log(book);
+        // setting image url
+        const imgUrl = book.cover_i? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : 'images/avatar_book-sm.png';
+        // preparing the search item div
         const div = document.createElement('div');
         div.classList.add('col-md-3', 'search-item');
         div.innerHTML = `
-            <div class="card">
-                <img src="..." class="card-img-top" alt="...">
+            <div class="card h-100">
+                <img height="200" src="${imgUrl}" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title fw-bold">Card title</h5>
+                    <h5 class="card-title fw-bold">${book.title}</h5>
                     <p class="lead"><strong>by </strong>${book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
-                    <p class="mb-0"><small class="text-muted">- First published in 2000</small></p>
-                    <p><small class="text-muted">- Published by <em><strong>Computer Step</strong></em></small></p>
+                    <p class="mb-0"><small class="text-muted">- First published in <em>${book.first_publish_year ? book.first_publish_year : 'year unknown'}</em></small></p>
+                    <p><small class="text-muted">- Published by <em><strong>${book.publisher ? book.publisher.join(', ') : 'unknown publisher'}</strong></em></small></p>
                 </div>
             </div>
         `;
