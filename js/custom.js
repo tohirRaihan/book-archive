@@ -1,4 +1,4 @@
-console.log('Iam connected');
+
 
 // search event
 document.getElementById('search-button').addEventListener('click', () => {
@@ -8,4 +8,8 @@ document.getElementById('search-button').addEventListener('click', () => {
     // dynamic url
     const url = `http://openlibrary.org/search.json?q=${searchText}`;
 
+    // fetch data from api
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => console.log(data.docs));
 });
