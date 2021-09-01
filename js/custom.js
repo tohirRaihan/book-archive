@@ -12,7 +12,7 @@ const displayBooks = (books) => {
     const searchItemsField = document.getElementById('search-items');
     searchItemsField.textContent = '';
 
-    // creating single item to display in search result
+    // creating single item to append in search result field
     books.forEach((book) => {
         // setting image url
         const imgUrl = book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : 'images/avatar_book-sm.png';
