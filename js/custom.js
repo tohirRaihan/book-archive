@@ -59,7 +59,7 @@ document.getElementById('search-button').addEventListener('click', () => {
     const searchText = searchInput.value;
     searchInput.value = '';
     // dynamic url
-    const url = `http://openlibrary.org/search.json?q=${searchText}`;
+    const url = `https://openlibrary.org/search.json?q=${searchText}`;
 
     // load books
     loadBooks(url);
