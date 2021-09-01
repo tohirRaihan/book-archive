@@ -7,7 +7,7 @@ const loadBooks = (url) => {
 
 // display books ---------------------------------------------------------------
 const displayBooks = (books) => {
-    console.log(books);
+    const totalBooks = books.length;
     // get search result field and clear previous results
     const searchItemsField = document.getElementById('search-items');
     searchItemsField.textContent = '';
@@ -26,27 +26,30 @@ const displayBooks = (books) => {
                     <h5 class="card-title fw-bold">${book.title}</h5>
                     <p class="lead"><strong>by </strong>${book.author_name ? book.author_name.join(', ') : 'Unknown'}</p>
                     <p class="mb-0"><small class="text-muted">- First published in <em>${book.first_publish_year ? book.first_publish_year : 'year unknown'}</em></small></p>
-                    <p><small class="text-muted">- Published by <em><strong>${book.publisher ? book.publisher.join(', ') : 'unknown publisher'}</strong></em></small></p>
+                    <p><small class="text-muted">- Published by <em><strong>${book.publisher ? book.publisher.slice(0, 5).join(', ') : 'unknown publisher'}</strong></em></small></p>
                 </div>
             </div>
         `;
         searchItemsField.appendChild(div);
     });
-    displayResultCount(books.length);
+    displayResultCount(totalBooks);
 };
 
 // display total result count --------------------------------------------------
 const displayResultCount = (total) => {
-    const resultCountInput = document.getElementsByClassName('result-count');
-    for (const resultCount of resultCountInput) {
-        console.log(resultCount);
-        resultCount.textContent = '';
-        const p = document.createElement('p');
-        p.innerHTML = `
-            <p>Total <span class="h5 fw-bold">${total}</span> search results found</p>
-        `;
-        resultCount.appendChild(p);
-    }
+    const resultCountInput = document.getElementById('result-count');
+    resultCountInput.textContent = '';
+        if (total === 0) {
+            resultCountInput.innerHTML = `
+                <div class="bg-danger p-3">
+                    <h5 class="text-white text-center">No result found</h5>
+                </div>
+            `;
+        } else {
+            resultCountInput.innerHTML = `
+                <p>Total <span class="h5 fw-bold">${total}</span> search results found</p>
+            `;
+        }
 };
 
 // search event
