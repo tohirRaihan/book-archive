@@ -1,3 +1,19 @@
+// search book with a book name ------------------------------------------------
+const searchBooks = () => {
+    // get search text
+    const searchInput = document.getElementById('search-input');
+    const searchText = searchInput.value;
+    searchInput.value = '';
+    // dynamic url
+    const url = `https://openlibrary.org/search.json?q=${searchText}`;
+    // show loading spinner
+    toggleSpinner('block');
+    // hide search result
+    toggleSearchResult('none');
+    // load books
+    loadBooks(url);
+};
+
 // load (fetch + display) all books --------------------------------------------
 const loadBooks = (url) => {
     fetch(url)
@@ -32,6 +48,7 @@ const displayBooks = (books) => {
         `;
         searchItemsField.appendChild(div);
     });
+    // display the number of total result found
     displayResultCount(totalBooks);
     // hide loading spinner
     toggleSpinner('none');
@@ -43,42 +60,29 @@ const displayBooks = (books) => {
 const displayResultCount = (total) => {
     const resultCountInput = document.getElementById('result-count');
     resultCountInput.textContent = '';
-        if (total === 0) {
-            resultCountInput.innerHTML = `
-                <div class="bg-danger p-3">
-                    <h5 class="text-white text-center">No result found</h5>
-                </div>
-            `;
-        } else {
-            resultCountInput.innerHTML = `
-                <p>Total <span class="h5 fw-bold">${total}</span> search results found</p>
-            `;
-        }
+    if (total === 0) {
+        resultCountInput.innerHTML = `
+            <div class="bg-danger p-3">
+                <h5 class="text-white text-center">No result found</h5>
+            </div>
+        `;
+    } else {
+        resultCountInput.innerHTML = `
+            <p>Total <span class="h5 fw-bold">${total}</span> search results found</p>
+        `;
+    }
 };
 
 // toggle(show or hide) spinner ------------------------------------------------
-const toggleSpinner = displayStyle => {
+const toggleSpinner = (displayStyle) => {
     document.getElementById('data-loader').style.display = displayStyle;
-}
+};
 
-const toggleSearchResult = displayStyle => {
+// toggle(show or hide) search related results ---------------------------------
+const toggleSearchResult = (displayStyle) => {
     document.getElementById('search-result').style.display = displayStyle;
     document.getElementById('search-result-count').style.display = displayStyle;
-}
+};
 
-// search event
-document.getElementById('search-button').addEventListener('click', () => {
-    // get search text
-    const searchInput = document.getElementById('search-input');
-    const searchText = searchInput.value;
-    searchInput.value = '';
-    // dynamic url
-    const url = `https://openlibrary.org/search.json?q=${searchText}`;
-    // show loading spinner
-    toggleSpinner('block');
-    // hide search result
-    toggleSearchResult('none');
-    // load books
-    loadBooks(url);
-
-});
+// search event for book searching
+document.getElementById('search-button').addEventListener('click', searchBooks);
