@@ -8,6 +8,8 @@
 
     <!-- Bootstrap stylesheet -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- custom stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
 
     <title>Book Archive</title>
 </head>
@@ -20,7 +22,7 @@
         =START MAIN
     ============================= -->
     <main class="my-5">
-        <!-- Book search section -->
+        <!-- Book search input section -->
         <section class="book-search mb-5">
             <div class="container">
                 <div class="row justify-content-center">
@@ -37,8 +39,17 @@
             <!-- /.container -->
         </section>
 
+        <!-- spinner section(it is active when loading data) -->
+        <section id="data-loader" class="">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </section>
+
         <!-- search result count section -->
-        <section class="search-result-count">
+        <section id="search-result-count">
             <div id="result-count" class="container">
                 <!-- _____________________________
                     # result count goes here
@@ -47,7 +58,7 @@
         </section>
 
         <!-- Search result section -->
-        <section class="search-result">
+        <section id="search-result">
             <div class="container">
                 <div id="search-items" class="row g-4">
                     <!-- _____________________________
@@ -56,18 +67,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- search result count section -->
-        <section class="search-result-count">
-            <div class="container result-count">
-                <!-- _____________________________
-                    # result count goes here
-                _____________________________ -->
-            </div>
-        </section>
-
-
-
     </main>
     <!-- ============================
         =END MAIN

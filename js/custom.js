@@ -33,6 +33,10 @@ const displayBooks = (books) => {
         searchItemsField.appendChild(div);
     });
     displayResultCount(totalBooks);
+    // hide loading spinner
+    toggleSpinner('none');
+    // show search result
+    toggleSearchResult('block');
 };
 
 // display total result count --------------------------------------------------
@@ -52,6 +56,16 @@ const displayResultCount = (total) => {
         }
 };
 
+// toggle(show or hide) spinner ------------------------------------------------
+const toggleSpinner = displayStyle => {
+    document.getElementById('data-loader').style.display = displayStyle;
+}
+
+const toggleSearchResult = displayStyle => {
+    document.getElementById('search-result').style.display = displayStyle;
+    document.getElementById('search-result-count').style.display = displayStyle;
+}
+
 // search event
 document.getElementById('search-button').addEventListener('click', () => {
     // get search text
@@ -60,7 +74,11 @@ document.getElementById('search-button').addEventListener('click', () => {
     searchInput.value = '';
     // dynamic url
     const url = `https://openlibrary.org/search.json?q=${searchText}`;
-
+    // show loading spinner
+    toggleSpinner('block');
+    // hide search result
+    toggleSearchResult('none');
     // load books
     loadBooks(url);
+
 });
